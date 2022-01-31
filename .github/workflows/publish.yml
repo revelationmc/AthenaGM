@@ -1,0 +1,45 @@
+name: Deploy
+on: [ push ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK 16
+        uses: actions/setup-java@v2
+        with:
+          java-version: '16'
+          distribution: 'adopt'
+
+      - name: Update Wrapper Permissions
+        run: chmod +x ./gradlew
+
+      - name: Gradle Build
+        run: ./gradlew shadowJar
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Package
+          path: build/libs
+
+      - name: Nexus Repo Publish
+        uses: sonatype-nexus-community/nexus-repo-github-action@master
+        with:
+          serverUrl: https://repo.savagedev.net
+          username: ${{ secrets.username }}
+          password: ${{ secrets.password }}
+          format: maven2
+          repository: maven-releases
+          coordinates: groupId=net.revelationmc artifactId=AthenaGM version=1.0.0
+          assets: extension=jar
+          filename: /build/libs/AthenaGM-*.jar
+
+      - name: Sync files
+        uses: SamKirkland/FTP-Deploy-Action@4.2.0
+        with:
+          server: bhs-adv4-38.server.pro
+          server-dir: plugins/
+          local-dir: build/libs/
+          username: 40924
+          password: ${{ secrets.password }}

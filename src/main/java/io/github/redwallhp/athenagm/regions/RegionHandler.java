@@ -21,7 +21,7 @@ public class RegionHandler {
 
     public RegionHandler(AthenaGM plugin) {
         this.plugin = plugin;
-        this.regions = new HashMap<UUID, LinkedHashMap<String, CuboidRegion>>();
+        this.regions = new HashMap<>();
         listen();
     }
 

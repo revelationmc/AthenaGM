@@ -120,6 +120,7 @@ public class AthenaGM extends JavaPlugin {
 
     /**
      * Get a reference to a loaded Module
+     *
      * @param name The name of the Module, as returned by its getModuleName() method
      * @return A Module object, which can be cast to the original class of the module to access its methods
      */
@@ -142,7 +143,7 @@ public class AthenaGM extends JavaPlugin {
      */
     public WorldEditPlugin getWE() {
         Plugin plugin = Bukkit.getServer().getPluginManager().getPlugin("WorldEdit");
-        if (plugin == null || !(plugin instanceof WorldEditPlugin)) {
+        if (!(plugin instanceof WorldEditPlugin)) {
             return null;
         }
         return (WorldEditPlugin) plugin;

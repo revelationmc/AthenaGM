@@ -47,7 +47,7 @@ public class SpectatorModule implements Module {
 
     public SpectatorModule(AthenaGM plugin) {
         this.plugin = plugin;
-        this.compassIndex = new HashMap<Player, Integer>();
+        this.compassIndex = new HashMap<>();
         this.helpBookItem = getHelpBookItem();
     }
 
@@ -98,7 +98,7 @@ public class SpectatorModule implements Module {
 
         inventory.addItem(this.helpBookItem);
 
-        ItemStack exitDoor = new ItemStack(Material.WOOD_DOOR, 1);
+        ItemStack exitDoor = new ItemStack(Material.OAK_DOOR, 1);
         ItemMeta exitDoorMeta = exitDoor.getItemMeta();
         exitDoorMeta.setDisplayName(ChatColor.AQUA + "Return to Minigames Hub");
         exitDoor.setItemMeta(exitDoorMeta);
@@ -119,7 +119,7 @@ public class SpectatorModule implements Module {
         }
 
         // Player is using the Help Book
-        if (event.getPlayer().getItemInHand() != null && event.getPlayer().getItemInHand().getType() == Material.WRITTEN_BOOK) {
+        if (event.getPlayer().getInventory().getItemInMainHand().getType() == Material.WRITTEN_BOOK) {
             if (event.getAction() == Action.RIGHT_CLICK_BLOCK && ItemUtil.getInteractiveBlocks().contains(event.getClickedBlock().getType())) {
                 event.setCancelled(true);
             }
@@ -127,7 +127,7 @@ public class SpectatorModule implements Module {
         }
 
         // Player is using team selector helmet
-        if (event.getPlayer().getItemInHand() != null && event.getPlayer().getItemInHand().getType() == Material.LEATHER_HELMET) {
+        if (event.getPlayer().getInventory().getItemInMainHand().getType() == Material.LEATHER_HELMET) {
             event.setCancelled(true);
             event.getPlayer().updateInventory();
             event.getPlayer().openInventory(getTeamPickerInventory(event.getPlayer()));
@@ -135,23 +135,22 @@ public class SpectatorModule implements Module {
         }
 
         // Player is using the navigation compass
-        if (event.getPlayer().getItemInHand() != null && event.getPlayer().getItemInHand().getType() == Material.COMPASS) {
+        if (event.getPlayer().getInventory().getItemInMainHand().getType() == Material.COMPASS) {
             event.setCancelled(true);
             doCompassTeleport(event);
             return;
         }
 
         // Player is using the exit door
-        if (event.getPlayer().getItemInHand() != null && event.getPlayer().getItemInHand().getType() == Material.WOOD_DOOR) {
+        if (event.getPlayer().getInventory().getItemInMainHand().getType() == Material.OAK_DOOR) {
             event.setCancelled(true);
             plugin.getHub().spawnPlayer(event.getPlayer());
-            event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ENTITY_ENDERMEN_TELEPORT, 1f, 1f);
+            event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1f, 1f);
             return;
         }
 
         // Cancel all other interact events
         event.setCancelled(true);
-
     }
 
 
@@ -161,7 +160,7 @@ public class SpectatorModule implements Module {
         ItemStack item = event.getCurrentItem();
         if (!isPlayerSpectator(player)) return;
         if (item != null) {
-            if (event.getInventory().getTitle().equals("Select Team")) {
+            if (event.getView().getTitle().equals("Select Team")) {
                 if (item.getType().equals(Material.LEATHER_HELMET)) {
                     String teamName = ChatColor.stripColor(item.getItemMeta().getDisplayName()).toLowerCase();
                     event.setCancelled(true);
@@ -203,7 +202,7 @@ public class SpectatorModule implements Module {
         if (event.getPlayer().getOpenInventory() != null) {
             event.setCancelled(true);
         } else {
-            event.getPlayer().setItemInHand(event.getItemDrop().getItemStack());
+            event.getPlayer().getInventory().setItemInMainHand(event.getItemDrop().getItemStack());
             event.getItemDrop().remove();
         }
     }

@@ -167,7 +167,7 @@ public class PlayerMovementListener implements Listener {
             Vector vec = toRegion.getFlagValue("teleport");
             Location loc = vec.toLocation(player.getWorld(), player.getLocation().getYaw(), player.getLocation().getPitch());
             player.teleport(loc);
-            player.playSound(player.getLocation(), Sound.ENTITY_ENDERMEN_TELEPORT, 1f, 1f);
+            player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1f, 1f);
         }
     }
 
@@ -196,7 +196,7 @@ public class PlayerMovementListener implements Listener {
             if (arena != null) {
                 Location loc = arena.getMatch().getSpawnPoint(event.getPlayer());
                 event.getPlayer().teleport(loc);
-                event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ENTITY_ENDERMEN_TELEPORT, 1f, 1f);
+                event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1f, 1f);
             }
         }
     }

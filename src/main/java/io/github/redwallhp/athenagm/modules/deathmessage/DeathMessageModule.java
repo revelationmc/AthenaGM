@@ -1,4 +1,4 @@
-package io.github.redwallhp.athenagm.modules.deathMessage;
+package io.github.redwallhp.athenagm.modules.deathmessage;
 
 import io.github.redwallhp.athenagm.AthenaGM;
 import io.github.redwallhp.athenagm.events.AthenaDeathEvent;

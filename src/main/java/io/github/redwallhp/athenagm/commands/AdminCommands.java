@@ -35,17 +35,13 @@ public class AdminCommands implements CommandExecutor {
         if (cmd.getName().equalsIgnoreCase("athena")) {
             if (args.length == 0) {
                 sender.sendMessage(ChatColor.RED + "Valid subcommands: reload, forcestart, changemap, checkperms");
-            }
-            else if (args[0].equalsIgnoreCase("reload")) {
+            } else if (args[0].equalsIgnoreCase("reload")) {
                 reloadCommand(sender, args);
-            }
-            else if (args[0].equalsIgnoreCase("forcestart")) {
+            } else if (args[0].equalsIgnoreCase("forcestart")) {
                 forceStartCommand(sender, args);
-            }
-            else if (args[0].equalsIgnoreCase("changemap")) {
+            } else if (args[0].equalsIgnoreCase("changemap")) {
                 changeMapCommand(sender, args);
-            }
-            else if (args[0].equalsIgnoreCase("checkperms")) {
+            } else if (args[0].equalsIgnoreCase("checkperms")) {
                 checkPerms(sender, args);
             }
             return true;
@@ -54,11 +50,9 @@ public class AdminCommands implements CommandExecutor {
         if (cmd.getName().equalsIgnoreCase("region")) {
             if (args.length == 0) {
                 sender.sendMessage(ChatColor.RED + "Valid subcommands: info, select");
-            }
-            else if (args[0].equalsIgnoreCase("info")) {
+            } else if (args[0].equalsIgnoreCase("info")) {
                 regionInfoCommand(sender, args);
-            }
-            else if (args[0].equalsIgnoreCase("select")) {
+            } else if (args[0].equalsIgnoreCase("select")) {
                 regionSelectCommand(sender, args);
             }
             return true;
@@ -211,8 +205,6 @@ public class AdminCommands implements CommandExecutor {
             WorldEditUtil.setPlayerSelection(player, rg.getWorld(), rg.getMin(), rg.getMax());
             sender.sendMessage(String.format("%sSelected region \"%s\"", ChatColor.DARK_AQUA, rg.getName()));
         }
-
     }
-
 
 }

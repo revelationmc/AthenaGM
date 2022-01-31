@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+group 'io.github.redwallhp'
+version '1.1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+
+    maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots' }
+    maven { url 'https://maven.enginehub.org/repo/' }
+}
+
+dependencies {
+    compileOnly 'org.spigotmc:spigot-api:1.18.1-R0.1-SNAPSHOT'
+
+    compileOnly 'com.sk89q.worldedit:worldedit-bukkit:7.2.0-SNAPSHOT'
+}
+
+processResources {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    from(sourceSets.main.resources.srcDirs) {
+        expand 'version': project.version
+        include 'plugin.yml'
+    }
+}

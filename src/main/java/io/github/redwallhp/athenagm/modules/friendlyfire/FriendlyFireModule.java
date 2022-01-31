@@ -1,4 +1,4 @@
-package io.github.redwallhp.athenagm.modules.friendlyFire;
+package io.github.redwallhp.athenagm.modules.friendlyfire;
 
 import io.github.redwallhp.athenagm.AthenaGM;
 import io.github.redwallhp.athenagm.arenas.Arena;
@@ -17,10 +17,8 @@ import org.bukkit.event.entity.PotionSplashEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
