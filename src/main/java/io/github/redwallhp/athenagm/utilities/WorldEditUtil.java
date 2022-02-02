@@ -4,7 +4,7 @@ package io.github.redwallhp.athenagm.utilities;
 import com.sk89q.worldedit.LocalSession;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.math.BlockVector3;
-import com.sk89q.worldedit.regions.CuboidRegion;
+import com.sk89q.worldedit.regions.selector.CuboidRegionSelector;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -30,7 +30,8 @@ public class WorldEditUtil {
         final Optional<WorldEditPlugin> worldEdit = getWorldEdit();
         if (worldEdit.isPresent()) {
             final LocalSession session = getWorldEdit().get().getSession(player);
-            CuboidRegion sel = new CuboidRegion(session.getSelectionWorld(), BlockVector3.at(min.getX(), min.getY(), min.getZ()), BlockVector3.at(max.getX(), max.getY(), max.getZ()));
+            final CuboidRegionSelector selector = new CuboidRegionSelector(session.getSelectionWorld(), BlockVector3.at(min.getX(), min.getY(), min.getZ()), BlockVector3.at(max.getX(), max.getY(), max.getZ()));
+            session.setRegionSelector(session.getSelectionWorld(), selector);
         }
     }
 

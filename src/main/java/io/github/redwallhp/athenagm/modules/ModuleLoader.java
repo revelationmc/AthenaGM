@@ -41,13 +41,13 @@ public class ModuleLoader {
     };
 
 
+    private final HashMap<Class<? extends Module>, Module> modules = new HashMap<>();
+
     private AthenaGM plugin;
-    private HashMap<String, Module> modules;
 
 
     public ModuleLoader(AthenaGM plugin) {
         this.plugin = plugin;
-        this.modules = new HashMap<String, Module>();
         load();
     }
 
@@ -64,7 +64,7 @@ public class ModuleLoader {
                 plugin.getLogger().info(String.format("Loading module: %s", c.getName()));
                 Module module = (Module) c.getConstructor(AthenaGM.class).newInstance(plugin); //evil sorcery
                 plugin.getServer().getPluginManager().registerEvents(module, plugin);
-                modules.put(module.getModuleName(), module);
+                modules.put(c, module);
             } catch (Exception ex) {
                 plugin.getLogger().warning(String.format("Error loading module '%s", c.getName()));
                 ex.printStackTrace();
@@ -88,11 +88,11 @@ public class ModuleLoader {
      * The returned object will be a Module, but you can recast it to the module's original class
      * in order to access its methods. e.g. casting the module found by getting "permissions"
      * to be a PermissionsModule will allow you to access its member methods.
-     * @param name Name of the module, as returned by its getModuleName() method
+     *
+     * @param clazz Class of the module.
      */
-    public Module getModule(String name) {
-        return modules.get(name);
+    public Module getModule(Class<? extends Module> clazz) {
+        return this.modules.get(clazz);
     }
-
 
 }

@@ -74,13 +74,13 @@ public class AdminCommands implements CommandExecutor {
         String what = args[1];
 
         if (what.equalsIgnoreCase("permissions")) {
-            PermissionsModule module = (PermissionsModule) plugin.getModule("permissions");
+            PermissionsModule module = plugin.getModule(PermissionsModule.class);
             module.reloadPermissions();
             sender.sendMessage(ChatColor.LIGHT_PURPLE + "Permissions reloaded.");
         }
 
         if (what.equalsIgnoreCase("helpbook")) {
-            SpectatorModule module = (SpectatorModule) plugin.getModule("spectator");
+            SpectatorModule module = plugin.getModule(SpectatorModule.class);
             module.getHelpBookItem();
             sender.sendMessage(ChatColor.LIGHT_PURPLE + "Spectator help book reloaded.");
         }
@@ -134,7 +134,7 @@ public class AdminCommands implements CommandExecutor {
 
         Player player = plugin.getServer().getPlayer(args[1]);
         if (player != null) {
-            PermissionsModule module = (PermissionsModule) plugin.getModule("permissions");
+            PermissionsModule module = plugin.getModule(PermissionsModule.class);
             sender.sendMessage("Results printed to console.");
             plugin.getServer().getLogger().info(String.format("--- Permission Check for %s ---", player.getName()));
             plugin.getServer().getLogger().info("UUID: " + player.getUniqueId());

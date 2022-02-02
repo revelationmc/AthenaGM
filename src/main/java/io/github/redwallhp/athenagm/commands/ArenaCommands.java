@@ -121,7 +121,7 @@ public class ArenaCommands implements CommandExecutor {
         Player player = (Player) sender;
         Arena arena = plugin.getArenaHandler().getArenaForPlayer(player);
         String map = (args.length == 1) ? args[0] : "";
-        VotingModule module = (VotingModule) plugin.getModule("voting");
+        VotingModule module = plugin.getModule(VotingModule.class);
         if (arena != null) {
             module.createMapVote(arena, player, map);
         }
@@ -135,7 +135,7 @@ public class ArenaCommands implements CommandExecutor {
         }
         Player player = (Player) sender;
         Arena arena = plugin.getArenaHandler().getArenaForPlayer(player);
-        VotingModule module = (VotingModule) plugin.getModule("voting");
+        VotingModule module = plugin.getModule(VotingModule.class);
         if (arena != null) {
             module.createNextMapVote(arena, player);
         }
@@ -149,7 +149,7 @@ public class ArenaCommands implements CommandExecutor {
         }
         Player player = (Player) sender;
         Arena arena = plugin.getArenaHandler().getArenaForPlayer(player);
-        VotingModule module = (VotingModule) plugin.getModule("voting");
+        VotingModule module = plugin.getModule(VotingModule.class);
         if (arena != null) {
             module.vote(arena, player, choice);
         }

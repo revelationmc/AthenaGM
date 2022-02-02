@@ -121,11 +121,11 @@ public class AthenaGM extends JavaPlugin {
     /**
      * Get a reference to a loaded Module
      *
-     * @param name The name of the Module, as returned by its getModuleName() method
+     * @param clazz The class of the Module.
      * @return A Module object, which can be cast to the original class of the module to access its methods
      */
-    public Module getModule(String name) {
-        return this.moduleLoader.getModule(name);
+    public <T extends Module> T getModule(Class<T> clazz) {
+        return (T) this.moduleLoader.getModule(clazz);
     }
 
 
@@ -148,6 +148,5 @@ public class AthenaGM extends JavaPlugin {
         }
         return (WorldEditPlugin) plugin;
     }
-
 
 }

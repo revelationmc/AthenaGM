@@ -53,7 +53,7 @@ public class MatchCommands implements CommandExecutor {
         }
 
         if (cmd.getName().equalsIgnoreCase("spectate")) {
-            String[] arguments = { "spectator" };
+            String[] arguments = {"spectator"};
             joinTeam(sender, arguments);
             return true;
         }
@@ -200,7 +200,7 @@ public class MatchCommands implements CommandExecutor {
         values.put("Deaths", playerScore.getDeaths());
         try {
             values.put("KDR", (playerScore.getKills() / playerScore.getDeaths()));
-        } catch(ArithmeticException ex) {
+        } catch (ArithmeticException ex) {
             if (playerScore.getKills() > 0) {
                 values.put("KDR", playerScore.getKills());
             } else {
@@ -302,7 +302,7 @@ public class MatchCommands implements CommandExecutor {
             sender.sendMessage(ChatColor.RED + "Send a message to your team: /t <msg>");
             return;
         } else {
-            ChatModule cm = (ChatModule) plugin.getModule("chat");
+            ChatModule cm = plugin.getModule(ChatModule.class);
             boolean success = cm.sendTeamMessage((Player) sender, StringUtil.joinArray(" ", args));
             if (!success) {
                 sender.sendMessage(ChatColor.RED + "You must be on a team to do that.");
