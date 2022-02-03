@@ -11,7 +11,6 @@ import java.util.List;
  */
 public class Rotation {
 
-
     private AthenaGM plugin;
     private List<String> mapList;
     private List<GameMap> maps;
@@ -20,7 +19,8 @@ public class Rotation {
 
     /**
      * Constructor
-     * @param plugin The AthenaGM instance
+     *
+     * @param plugin  The AthenaGM instance
      * @param mapList String list of the maps in the configured map rotation
      */
     public Rotation(AthenaGM plugin, List<String> mapList) {
@@ -33,6 +33,7 @@ public class Rotation {
 
     /**
      * Create GameMap objects containing the metadata of every map configured for the arena
+     *
      * @see GameMap
      */
     private void loadMaps() {
@@ -68,10 +69,13 @@ public class Rotation {
      * Returns the map that is currently active
      */
     public GameMap getCurrentMap() {
+        if (this.maps.isEmpty()) {
+            return null;
+        }
         try {
-            return maps.get(mapIndex - 1);
+            return this.maps.get(mapIndex - 1);
         } catch (IndexOutOfBoundsException e) {
-            return maps.get(0);
+            return this.maps.get(0);
         }
     }
 
@@ -96,6 +100,7 @@ public class Rotation {
 
     /**
      * Advance the rotation to a specific named map
+     *
      * @param mapName the map to change to
      * @return success
      */
@@ -110,6 +115,7 @@ public class Rotation {
 
     /**
      * Get a configured map by name
+     *
      * @param name String representation of the map name
      */
     public GameMap getMapByName(String name) {
@@ -124,6 +130,7 @@ public class Rotation {
 
     /**
      * Get a configured map by filename
+     *
      * @param fileName String representation of the map's directory name
      */
     public GameMap getMapByFileName(String fileName) {

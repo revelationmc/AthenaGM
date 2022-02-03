@@ -17,11 +17,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerPickupArrowEvent;
-import org.bukkit.event.player.PlayerPickupItemEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.event.vehicle.VehicleDamageEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.inventory.Inventory;
@@ -52,7 +48,8 @@ public class SpectatorModule implements Module {
     }
 
 
-    public void unload() {}
+    public void unload() {
+    }
 
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -287,7 +284,7 @@ public class SpectatorModule implements Module {
 
 
     private void doCompassTeleport(PlayerInteractEvent event) {
-        if (event.getAction() == Action.LEFT_CLICK_BLOCK  || event.getAction() == Action.LEFT_CLICK_AIR) {
+        if (event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.LEFT_CLICK_AIR) {
             // Teleport to the next player
             Match match = plugin.getArenaHandler().getArenaForPlayer(event.getPlayer()).getMatch();
             List<Player> players = new ArrayList<Player>();
@@ -320,6 +317,9 @@ public class SpectatorModule implements Module {
 
     public ItemStack getHelpBookItem() {
         File file = new File(plugin.getDataFolder(), "helpbook.txt");
+        if (!file.exists()) {
+            return BookBuilder.emptyBook();
+        }
         BookBuilder bookBuilder = new BookBuilder("Help");
         bookBuilder.setDefaultContents("This book will be populated with the contents of a &lhelpbook.txt&0 file in the plugin directory.");
         bookBuilder.setPagesFromFile(file);

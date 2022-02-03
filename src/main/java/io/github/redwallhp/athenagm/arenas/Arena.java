@@ -47,12 +47,7 @@ public class Arena {
         this.rotation = new Rotation(plugin, this.mapList);
         this.mapLoader = new MapLoader(rotation.getCurrentMap(), this);
 
-        Bukkit.getScheduler().runTask(this.plugin, new Runnable() {
-            public void run() {
-                startNewMatch();
-            }
-        });
-
+        Bukkit.getScheduler().runTask(this.plugin, this::startNewMatch);
     }
 
 

@@ -19,11 +19,13 @@ import java.util.List;
  */
 public class BookBuilder {
 
+    public static ItemStack emptyBook() {
+        return new ItemStack(Material.BOOK);
+    }
 
     private ItemStack item;
     private BookMeta meta;
     private String defaultContents = "";
-
 
     /**
      * @param title The book title
@@ -37,6 +39,7 @@ public class BookBuilder {
 
     /**
      * Get the finished ItemStack built by BookBuilder
+     *
      * @return The usable ItemStack object
      */
     public ItemStack getBook() {
@@ -47,6 +50,7 @@ public class BookBuilder {
 
     /**
      * Set the book's author
+     *
      * @param author The book's author
      */
     public BookBuilder setAuthor(String author) {
@@ -58,6 +62,7 @@ public class BookBuilder {
     /**
      * Set the default page contents to use if the string passed to
      * parseBookContents() is empty. Defaults to ""
+     *
      * @param defaultContents Page contents
      */
     public BookBuilder setDefaultContents(String defaultContents) {
@@ -70,6 +75,7 @@ public class BookBuilder {
      * Take a string and split it into book pages.
      * Formatting codes are parsed with "&" as the token.
      * Page breaks can be manually inserted with ">>>>>" (5 or more ">" symbols)
+     *
      * @param contents String to set as book pages
      */
     public BookBuilder setPagesFromString(String contents) {
@@ -82,6 +88,7 @@ public class BookBuilder {
      * Load a file's contents and split it into book pages.
      * Formatting codes are parsed with "&" as the token.
      * Page breaks can be manually inserted with ">>>>>" (5 or more ">" symbols)
+     *
      * @param file File to load
      */
     public BookBuilder setPagesFromFile(File file) {
@@ -99,7 +106,7 @@ public class BookBuilder {
             }
             reader.close();
             parseBookContents(sb.toString());
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
         return this;
@@ -110,6 +117,7 @@ public class BookBuilder {
      * Splits a string into page-sized strings and sets them on the BookMeta.
      * Also handles manual page breaks and applies formatting codes.
      * For an unknown reason, &r does not reset formatting. &0 works as a substitute.
+     *
      * @param contents Book contents
      */
     private void parseBookContents(String contents) {
