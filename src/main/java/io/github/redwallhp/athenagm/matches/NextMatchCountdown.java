@@ -1,6 +1,7 @@
 package io.github.redwallhp.athenagm.matches;
 
 import io.github.redwallhp.athenagm.arenas.Arena;
+import io.github.redwallhp.athenagm.maps.GameMap;
 import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -13,8 +14,11 @@ public class NextMatchCountdown extends BukkitRunnable {
     public NextMatchCountdown(Arena arena) {
         this.arena = arena;
         this.match = arena.getMatch();
-        String map = arena.getRotation().getNextMap().getName();
-        match.broadcast(String.format("%sNext map: %s. Changing in %d seconds...", ChatColor.DARK_AQUA, map, seconds));
+        final GameMap map = arena.getRotation().getNextMap();
+        if (map != null) {
+            final String mapName = map.getName();
+            match.broadcast(String.format("%sNext map: %s. Changing in %d seconds...", ChatColor.DARK_AQUA, mapName, seconds));
+        }
         this.runTaskTimer(match.getPlugin(), 0L, 20L);
     }
 

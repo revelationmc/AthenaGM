@@ -25,7 +25,8 @@ public class MapLoader {
 
     /**
      * Constructor
-     * @param map The metadata of the map to load
+     *
+     * @param map   The metadata of the map to load
      * @param arena The Arena calling this MapLoader
      */
     public MapLoader(GameMap map, Arena arena) {
@@ -62,9 +63,13 @@ public class MapLoader {
 
     /**
      * Create a new instanced copy of a world save, copying it from the maps directory to the matches directory
+     *
      * @param targetLocation
      */
     public void createWorldInstanceCopy(File targetLocation) {
+        if (this.map == null) {
+            return;
+        }
         try {
             recursiveCopyDirectory(this.map.getPath(), targetLocation);
         } catch (Exception ex) {
@@ -75,6 +80,7 @@ public class MapLoader {
 
     /**
      * Delete an instanced world directory
+     *
      * @param file Path to the world
      */
     public void destroyWorldInstanceCopy(File file) {
@@ -89,6 +95,7 @@ public class MapLoader {
     /**
      * Remove all existing instanced world directories.
      * This is run when the server starts, to clear old ones.
+     *
      * @param matchesDir The directory the worlds are copied to by MapLoader ("matches" in the server directory)
      */
     public static void cleanUpWorldInstances(File matchesDir) {
@@ -101,6 +108,7 @@ public class MapLoader {
 
     /**
      * Delete a directory and its contents
+     *
      * @param file The directory to delete
      */
     public static void recursiveDelete(File file) {
@@ -115,7 +123,8 @@ public class MapLoader {
 
     /**
      * Copy a directory and its contents
-     * @param source Directory to copy
+     *
+     * @param source      Directory to copy
      * @param destination Location to copy the directory to
      */
     public static void recursiveCopyDirectory(File source, File destination) {
@@ -139,6 +148,9 @@ public class MapLoader {
      * then sets the arena's world property to the new world object.
      */
     public void load() {
+        if (this.map == null) {
+            return;
+        }
         File instanceLocation = new File(plugin.getMatchesDirectory(), this.uuid.toString());
         createWorldInstanceCopy(instanceLocation);
         World world = new WorldCreator(instanceLocation.getPath()).generator(new VoidGenerator()).createWorld();

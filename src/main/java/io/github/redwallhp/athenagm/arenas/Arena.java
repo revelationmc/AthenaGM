@@ -4,6 +4,7 @@ package io.github.redwallhp.athenagm.arenas;
 import io.github.redwallhp.athenagm.AthenaGM;
 import io.github.redwallhp.athenagm.configuration.ConfiguredArena;
 import io.github.redwallhp.athenagm.events.MatchCreateEvent;
+import io.github.redwallhp.athenagm.maps.GameMap;
 import io.github.redwallhp.athenagm.maps.MapLoader;
 import io.github.redwallhp.athenagm.maps.Rotation;
 import io.github.redwallhp.athenagm.matches.Match;
@@ -52,8 +53,9 @@ public class Arena {
 
 
     public void startNewMatch() {
+        final GameMap map = rotation.getNextMap();
 
-        if (rotation.getNextMap().equals(mapLoader.getMap())) {
+        if (map != null && map.equals(mapLoader.getMap())) {
             rotation.advance();
         }
 

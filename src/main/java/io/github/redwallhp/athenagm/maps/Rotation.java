@@ -94,6 +94,9 @@ public class Rotation {
      * Return the upcoming map in the rotation
      */
     public GameMap getNextMap() {
+        if (this.maps.isEmpty()) {
+            return null;
+        }
         return maps.get(mapIndex);
     }
 

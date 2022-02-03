@@ -4,12 +4,14 @@ package io.github.redwallhp.athenagm.hub;
 import io.github.redwallhp.athenagm.AthenaGM;
 import io.github.redwallhp.athenagm.arenas.Arena;
 import io.github.redwallhp.athenagm.maps.VoidGenerator;
-import io.github.redwallhp.athenagm.matches.Team;
 import io.github.redwallhp.athenagm.regions.CuboidRegion;
 import io.github.redwallhp.athenagm.regions.Flags.StringFlag;
 import io.github.redwallhp.athenagm.utilities.BookBuilder;
 import io.github.redwallhp.athenagm.utilities.PlayerUtil;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -159,6 +161,9 @@ public class Hub {
      */
     private ItemStack loadHelpBookItem() {
         File file = new File(plugin.getDataFolder(), "helpbook.txt");
+        if (!file.exists()) {
+            return BookBuilder.emptyBook();
+        }
         BookBuilder bookBuilder = new BookBuilder("Help");
         bookBuilder.setDefaultContents("This book will be populated with the contents of a &lhelpbook.txt&0 file in the plugin directory.");
         bookBuilder.setPagesFromFile(file);
@@ -169,6 +174,7 @@ public class Hub {
 
     /**
      * Get an instance of the Hub world
+     *
      * @return Returns the World if applicable or null if a World is not loaded
      */
     public World getWorld() {
@@ -182,6 +188,7 @@ public class Hub {
 
     /**
      * Convenience method to check if a player is in the Hub world
+     *
      * @param player Player to check
      * @return True if the player is in the Hub world
      */
