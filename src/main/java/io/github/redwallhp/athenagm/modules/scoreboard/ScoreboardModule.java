@@ -167,7 +167,7 @@ public class ScoreboardModule implements Module {
         Scoreboard board = boards.get(match);
         Objective objective = board.registerNewObjective("playerhealth", "health");
         objective.setDisplaySlot(DisplaySlot.BELOW_NAME);
-        objective.setDisplayName(ChatColor.RED + "❤");
+        objective.setDisplayName(ChatColor.RED + "\u2764");
 
         //Force health objective to update health readout
         for (Team team : match.getTeams().values()) {

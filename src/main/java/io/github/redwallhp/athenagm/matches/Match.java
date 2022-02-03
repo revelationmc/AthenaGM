@@ -95,7 +95,7 @@ public class Match {
             printWinner();
             NextMatchCountdown countdown = new NextMatchCountdown(arena);
             getPlugin().getLogger().info(String.format("Ended match \"%s\" for arena \"%s\"", getUUID(), arena.getName()));
-            playSound(Sound.ENTITY_ENDERDRAGON_DEATH);
+            playSound(Sound.ENTITY_ENDER_DRAGON_DEATH);
         }
     }
 
