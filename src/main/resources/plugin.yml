@@ -5,6 +5,7 @@ author: redwall_hp
 version: ${version}
 load: startup
 
+api-version: 1.13
 
 permissions:
   athenagm.admin:

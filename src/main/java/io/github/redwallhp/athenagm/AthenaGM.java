@@ -28,7 +28,6 @@ import java.io.File;
  */
 public class AthenaGM extends JavaPlugin {
 
-
     public Configuration config;
     private ArenaHandler arenaHandler;
     private ModuleLoader moduleLoader;
