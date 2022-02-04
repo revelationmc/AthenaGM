@@ -2,6 +2,7 @@ package io.github.redwallhp.athenagm.maps;
 
 import io.github.redwallhp.athenagm.AthenaGM;
 import io.github.redwallhp.athenagm.arenas.Arena;
+import org.bukkit.GameRule;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.util.FileUtil;
@@ -15,7 +16,6 @@ import java.util.UUID;
  * into a GameMap object.
  */
 public class MapLoader {
-
 
     private GameMap map;
     private Arena arena;
@@ -159,7 +159,11 @@ public class MapLoader {
         world.setSpawnFlags(false, false); //no mobs
         world.setAutoSave(false);
         world.setKeepSpawnInMemory(false);
-        world.setGameRuleValue("announceAdvancements", "false");
+        world.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false);
+        world.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true);
+        world.setGameRule(GameRule.DISABLE_RAIDS, true);
+        world.setGameRule(GameRule.DO_INSOMNIA, false);
+        world.setGameRule(GameRule.DO_MOB_SPAWNING, false);
         arena.setWorld(world);
         arena.setWorldFile(instanceLocation);
         plugin.getLogger().info(String.format("Loaded map \"%s\" for arena \"%s\"", getMap().getName(), arena.getName()));

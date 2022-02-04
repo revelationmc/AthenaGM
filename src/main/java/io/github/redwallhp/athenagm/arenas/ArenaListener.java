@@ -25,9 +25,8 @@ import org.bukkit.event.player.*;
 
 public class ArenaListener implements Listener {
 
-
-    private ArenaHandler arenaHandler;
-    private AthenaGM plugin;
+    private final ArenaHandler arenaHandler;
+    private final AthenaGM plugin;
 
 
     public ArenaListener(ArenaHandler arenaHandler) {
@@ -196,6 +195,5 @@ public class ArenaListener implements Listener {
         player.sendMessage(ChatColor.STRIKETHROUGH + rule);
 
     }
-
 
 }

@@ -17,7 +17,6 @@ import java.util.*;
  */
 public class CuboidRegion {
 
-
     private String name;
     private UUID worldID;
     private Vector start;
@@ -39,7 +38,7 @@ public class CuboidRegion {
         this.start = start;
         this.end = end;
         this.priority = 0;
-        this.flags = new HashMap<String, Flag<?>>();
+        this.flags = new HashMap<>();
     }
 
 

@@ -40,7 +40,7 @@ public class FriendlyFireModule implements Module {
 
     public FriendlyFireModule(AthenaGM plugin) {
         this.plugin = plugin;
-        this.exemptions = new HashMap<UUID, Boolean>();
+        this.exemptions = new HashMap<>();
     }
 
 

@@ -12,7 +12,6 @@ import java.util.Set;
 
 public class ArenaHandler {
 
-
     private AthenaGM plugin;
     private Map<String, Arena> arenas;
 
@@ -60,6 +59,5 @@ public class ArenaHandler {
         }
         return null;
     }
-
 
 }

@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
  */
 public class Match {
 
-
     private Arena arena;
     private UUID uuid;
     private GameMap map;
@@ -326,6 +325,5 @@ public class Match {
     public World getWorld() {
         return arena.getWorld();
     }
-
 
 }

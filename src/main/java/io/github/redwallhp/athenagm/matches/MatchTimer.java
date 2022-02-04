@@ -8,7 +8,6 @@ import org.bukkit.scheduler.BukkitTask;
 
 public class MatchTimer implements Runnable {
 
-
     private Match match;
     private long endTime;
     private BukkitTask task;
@@ -95,6 +94,5 @@ public class MatchTimer implements Runnable {
     public long getEndTime() {
         return endTime;
     }
-
 
 }

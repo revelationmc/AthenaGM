@@ -111,7 +111,7 @@ public class RegionHandler {
 
         // Get the highest priority region
         List<CuboidRegion> applicableRegions = getAllApplicableRegions(world, vector);
-        TreeMap<Integer, CuboidRegion> regionMap = new TreeMap<Integer, CuboidRegion>();
+        TreeMap<Integer, CuboidRegion> regionMap = new TreeMap<>();
         int i = 0;
         for (CuboidRegion rg : applicableRegions) {
             if (rg.getPriority() > 0) {

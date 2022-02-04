@@ -8,7 +8,6 @@ import org.bukkit.entity.Player;
  */
 public class PlayerScore {
 
-
     private Player player;
     private Team team;
     private int points = 0;

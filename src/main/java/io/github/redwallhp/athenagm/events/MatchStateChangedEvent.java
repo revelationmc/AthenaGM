@@ -8,12 +8,13 @@ import org.bukkit.event.HandlerList;
 /**
  * Called when the MatchState of a Match changes
  * e.g. when it goes from active gameplay to a win state
+ *
  * @see MatchState
  * @see Match
  */
 public class MatchStateChangedEvent extends Event {
-
     private static final HandlerList handlers = new HandlerList();
+
     private Match match;
     private MatchState previousState;
 

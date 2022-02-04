@@ -18,7 +18,6 @@ permissions:
     description: General functions
     default: true
 
-
 commands:
   athena:
     usage: /athena <subcommand>

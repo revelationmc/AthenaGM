@@ -110,8 +110,6 @@ public class Tracker implements Listener {
         }
 
         Bukkit.getPluginManager().callEvent(e);
-
     }
-
 
 }

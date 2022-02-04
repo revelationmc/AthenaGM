@@ -18,7 +18,6 @@ import java.util.List;
  */
 public class AthenaDeathEvent extends Event {
 
-
     private static final HandlerList handlers = new HandlerList();
     private Match match;
     private Player victim;
@@ -105,6 +104,7 @@ public class AthenaDeathEvent extends Event {
 
     /**
      * Get whether this was a PvP death or not.
+     *
      * @return true if the victim was killed by a player
      */
     public boolean isPvP() {
@@ -153,6 +153,5 @@ public class AthenaDeathEvent extends Event {
     public PlayerDeathEvent getDeathEvent() {
         return deathEvent;
     }
-
 
 }

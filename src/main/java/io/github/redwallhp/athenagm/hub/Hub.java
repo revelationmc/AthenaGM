@@ -21,7 +21,6 @@ import java.lang.ref.WeakReference;
 
 public class Hub {
 
-
     private AthenaGM plugin;
     private HubListener listener;
     private HubConfiguration config;
@@ -36,18 +35,26 @@ public class Hub {
         this.listener = new HubListener(plugin, this);
         this.helpBookItem = loadHelpBookItem();
 
+        final File hubFile = new File(plugin.getDataFolder(), "hub.yml");
+
+        if (!hubFile.exists()) {
+            try {
+                hubFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         try {
-            config = new HubConfiguration(this, new File(plugin.getDataFolder(), "hub.yml"));
+            config = new HubConfiguration(this, hubFile);
         } catch (IOException ex) {
             plugin.getLogger().warning(ex.getMessage());
         }
 
-        Bukkit.getScheduler().runTask(this.plugin, new Runnable() {
-            public void run() {
-                loadWorld();
-                loadPortalRegions();
-                updatePortalSigns();
-            }
+        Bukkit.getScheduler().runTask(this.plugin, () -> {
+            loadWorld();
+            loadPortalRegions();
+            updatePortalSigns();
         });
 
     }
@@ -69,7 +76,7 @@ public class Hub {
                 world.setPVP(false);
                 world.setSpawnFlags(false, false); //no mobs
                 world.setKeepSpawnInMemory(false);
-                this.world = new WeakReference<World>(world);
+                this.world = new WeakReference<>(world);
             } catch (Exception ex) {
                 plugin.getLogger().warning("Error loading hub world: " + ex.getMessage());
                 if (plugin.config.DEBUG) {
@@ -115,7 +122,7 @@ public class Hub {
     /**
      * Handle player spawning on join. Ensures a player rejoining will always go to the Hub and not a stale Match.
      * Order of priority:
-     * 1. If dedicated mode is on, put the player directly in the specified arena if it exists. Fall back to defaul world.
+     * 1. If dedicated mode is on, put the player directly in the specified arena if it exists. Fall back to default world.
      * 2. If the world specified in hub.yml exists and is loaded, spawn the player there.
      * 3. If all else fails, teleport them to the default world.
      */

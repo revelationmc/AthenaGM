@@ -22,7 +22,6 @@ import java.util.Set;
  */
 public class Team {
 
-
     private Match match;
     private String id;
     private String name;
@@ -297,6 +296,5 @@ public class Team {
             player.sendMessage(message);
         }
     }
-
 
 }

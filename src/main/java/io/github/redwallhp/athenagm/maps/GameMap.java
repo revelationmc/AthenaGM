@@ -135,7 +135,7 @@ public class GameMap {
      * @param yaml The FileConfiguration reference from the constructor
      */
     private void loadKits(FileConfiguration yaml) {
-        this.kits = new HashMap<String, List<MapInfoKitItem>>();
+        this.kits = new HashMap<>();
         if (yaml.getConfigurationSection("kits") == null) return;
         Set<String> ids = yaml.getConfigurationSection("kits").getKeys(false);
         for (String id : ids) {
@@ -247,7 +247,7 @@ public class GameMap {
      * @see io.github.redwallhp.athenagm.regions.RegionHandler
      */
     private void loadRegions(FileConfiguration yaml) {
-        this.regions = new LinkedHashMap<String, MapInfoRegion>();
+        this.regions = new LinkedHashMap<>();
         if (yaml.getConfigurationSection("regions") == null) return;
         Set<String> names = yaml.getConfigurationSection("regions").getKeys(false);
         for (String name : names) {

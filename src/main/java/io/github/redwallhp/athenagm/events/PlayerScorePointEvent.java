@@ -13,7 +13,6 @@ import org.bukkit.event.HandlerList;
  */
 public class PlayerScorePointEvent extends Event {
 
-
     private static final HandlerList handlers = new HandlerList();
     private Player player;
     private Team team;
@@ -55,6 +54,5 @@ public class PlayerScorePointEvent extends Event {
     public PlayerScore getPlayerScore() {
         return team.getPlayerScore(player);
     }
-
 
 }

@@ -14,7 +14,6 @@ import org.bukkit.inventory.ItemStack;
  */
 public class PlayerDamagePlayerEvent extends Event implements Cancellable {
 
-
     private static final HandlerList handlers = new HandlerList();
     private boolean cancelled;
     private Match match;
@@ -129,6 +128,5 @@ public class PlayerDamagePlayerEvent extends Event implements Cancellable {
     public boolean isRanged() {
         return ranged;
     }
-
 
 }

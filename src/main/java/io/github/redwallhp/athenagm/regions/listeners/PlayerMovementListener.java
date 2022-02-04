@@ -2,10 +2,12 @@ package io.github.redwallhp.athenagm.regions.listeners;
 
 import io.github.redwallhp.athenagm.AthenaGM;
 import io.github.redwallhp.athenagm.arenas.Arena;
+import io.github.redwallhp.athenagm.events.PlayerEnterRegionEvent;
 import io.github.redwallhp.athenagm.matches.Team;
 import io.github.redwallhp.athenagm.regions.CuboidRegion;
 import io.github.redwallhp.athenagm.regions.RegionHandler;
 import io.github.redwallhp.athenagm.utilities.PlayerUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -26,7 +28,6 @@ import java.util.UUID;
  */
 public class PlayerMovementListener implements Listener {
 
-
     private AthenaGM plugin;
     private RegionHandler regionHandler;
     private HashMap<UUID, Integer> timeLockedPlayers;
@@ -44,8 +45,14 @@ public class PlayerMovementListener implements Listener {
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         if (!event.isCancelled()) {
-            CuboidRegion toRegion = regionHandler.getApplicableRegion(event.getTo());
-            CuboidRegion fromRegion = regionHandler.getApplicableRegion(event.getFrom());
+            final CuboidRegion toRegion = regionHandler.getApplicableRegion(event.getTo());
+            if (toRegion != null) {
+                Bukkit.getServer().getPluginManager().callEvent(new PlayerEnterRegionEvent(toRegion, event.getPlayer()));
+            }
+            final CuboidRegion fromRegion = regionHandler.getApplicableRegion(event.getFrom());
+            if (fromRegion != null) {
+                Bukkit.getServer().getPluginManager().callEvent(new PlayerEnterRegionEvent(fromRegion, event.getPlayer()));
+            }
             handleEntryDeny(event, toRegion);
             handleExitDeny(event, fromRegion);
             handleTeamRestricted(event, toRegion);
@@ -148,7 +155,7 @@ public class PlayerMovementListener implements Listener {
             if (!toRegion.contains(event.getFrom())) {
                 Vector from = event.getFrom().toVector();
                 Vector to = event.getTo().toVector();
-                from.setY(from.getY()-0.25);
+                from.setY(from.getY() - 0.25);
                 Vector dir = to.subtract(from).normalize();
                 Double multiplier = toRegion.getFlagValue("velocity");
                 event.getPlayer().setVelocity(dir.multiply(multiplier));
@@ -176,9 +183,10 @@ public class PlayerMovementListener implements Listener {
      * Knock the player back, based on a multiple of their previous forward velocity.
      * Calculates a backward trajectory by subtracting the "to" vector from the "from vector,
      * and multiplies it to create a knockback effect.
+     *
      * @param player The player to knock back
-     * @param to The block the player was moving to
-     * @param from The block the player was moving from
+     * @param to     The block the player was moving to
+     * @param from   The block the player was moving from
      */
     private void knockBack(Player player, Vector to, Vector from, float multiplier) {
         Vector dir = from.subtract(to).normalize();
@@ -257,6 +265,5 @@ public class PlayerMovementListener implements Listener {
         if (team != null) val = team.isSpectator();
         return val;
     }
-
 
 }

@@ -13,7 +13,6 @@ import org.bukkit.event.HandlerList;
  */
 public class PlayerChangedTeamEvent extends Event {
 
-
     private static final HandlerList handlers = new HandlerList();
     private Player player;
     private Team team;
@@ -62,6 +61,5 @@ public class PlayerChangedTeamEvent extends Event {
     public boolean hasPreviousTeam() {
         return (this.previousTeam != null);
     }
-
 
 }

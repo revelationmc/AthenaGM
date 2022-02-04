@@ -15,7 +15,6 @@ import org.bukkit.event.HandlerList;
  */
 public class PlayerChangingTeamEvent extends Event implements Cancellable {
 
-
     private static final HandlerList handlers = new HandlerList();
     private boolean cancelled;
     private Player player;
@@ -75,6 +74,5 @@ public class PlayerChangingTeamEvent extends Event implements Cancellable {
     public boolean hasPreviousTeam() {
         return (this.previousTeam != null);
     }
-
 
 }
