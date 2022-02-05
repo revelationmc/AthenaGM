@@ -210,7 +210,7 @@ public class ArenaListener implements Listener {
         final Collection<Team> teams = match.getTeams().values();
         Team smallest = null;
         for (Team team : teams) {
-            if (team.getPlayers().size() >= team.getSize()) {
+            if (team.isSpectator() || team.getPlayers().size() >= team.getSize()) {
                 continue;
             }
             if (smallest == null) {
