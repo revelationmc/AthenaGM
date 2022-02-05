@@ -30,7 +30,6 @@ import java.util.*;
 
 public class SpectatorModule implements Module {
 
-
     private AthenaGM plugin;
     private HashMap<Player, Integer> compassIndex;
     private ItemStack helpBookItem;
@@ -372,6 +371,5 @@ public class SpectatorModule implements Module {
         Team team = PlayerUtil.getTeamForPlayer(plugin.getArenaHandler(), player);
         return (team != null && team.isSpectator());
     }
-
 
 }

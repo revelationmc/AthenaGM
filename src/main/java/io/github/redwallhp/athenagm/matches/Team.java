@@ -52,7 +52,7 @@ public class Team {
         this.size = size;
         this.spectator = spectator;
         this.players = new HashSet<>();
-        this.playerScores = new HashMap<Player, PlayerScore>();
+        this.playerScores = new HashMap<>();
         this.points = 0;
     }
 

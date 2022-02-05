@@ -51,7 +51,7 @@ public class Match {
      * Always includes a spectator team.
      */
     private void setUpTeams() {
-        teams = new HashMap<String, Team>();
+        teams = new HashMap<>();
         Team spectator = new Team(this, "spectator", "gray", "nokit", 99, true);
         teams.put("spectator", spectator);
         for (MapInfoTeam ct : map.getTeams().values()) {
@@ -204,7 +204,7 @@ public class Match {
      * Get a HashMap of the players across the Match's Teams
      */
     public HashMap<Player, Team> getPlayerTeamMap() {
-        HashMap<Player, Team> map = new HashMap<Player, Team>();
+        HashMap<Player, Team> map = new HashMap<>();
         for (Team t : this.getTeams().values()) {
             for (Player p : t.getPlayers()) {
                 map.put(p, t);
@@ -226,7 +226,7 @@ public class Match {
         if (team == null) {
             team = this.teams.get("spectator");
         }
-        List<MapInfoSpawnPoint> teamPoints = new ArrayList<MapInfoSpawnPoint>();
+        List<MapInfoSpawnPoint> teamPoints = new ArrayList<>();
         for (MapInfoSpawnPoint point : map.getSpawnPoints()) {
             if (point.getTeam().equals(team.getId())) {
                 teamPoints.add(point);

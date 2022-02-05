@@ -11,23 +11,20 @@ import io.github.redwallhp.athenagm.matches.Team;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.*;
+
+import java.util.Collection;
+import java.util.Set;
 
 
 public class ArenaListener implements Listener {
 
     private final ArenaHandler arenaHandler;
     private final AthenaGM plugin;
-
 
     public ArenaListener(ArenaHandler arenaHandler) {
         this.arenaHandler = arenaHandler;
@@ -70,6 +67,7 @@ public class ArenaListener implements Listener {
 
     /**
      * Handle respawns, overriding location and emitting a custom event
+     *
      * @see PlayerMatchRespawnEvent
      */
     @EventHandler(priority = EventPriority.LOW)
@@ -146,14 +144,26 @@ public class ArenaListener implements Listener {
      * Move player to spectator team to start.
      * Emit PlayerEnterMatchWorldEvent.
      * Print map information.
+     *
      * @see PlayerEnterMatchWorldEvent
      */
     private void playerEnterMatchWorld(Player player) {
 
         Arena arena = arenaHandler.getArenaForPlayer(player);
 
-        // make them a spectator to start
-        arena.getMatch().addPlayerToTeam("spectator", player);
+        final Match match = arena.getMatch();
+
+        if (match.isPlaying()) {
+            // make them a spectator if the game is in progress.
+            match.addPlayerToTeam("spectator", player);
+        } else {
+            final Team team = this.getSmallestTeam(match);
+            if (team == null) {
+                match.addPlayerToTeam("spectator", player);
+            } else {
+                team.add(player, false);
+            }
+        }
 
         // player has entered the match world
         PlayerEnterMatchWorldEvent e = new PlayerEnterMatchWorldEvent(arena, player);
@@ -196,4 +206,21 @@ public class ArenaListener implements Listener {
 
     }
 
+    private Team getSmallestTeam(Match match) {
+        final Collection<Team> teams = match.getTeams().values();
+        Team smallest = null;
+        for (Team team : teams) {
+            if (team.getPlayers().size() >= team.getSize()) {
+                continue;
+            }
+            if (smallest == null) {
+                smallest = team;
+                continue;
+            }
+            if (team.getPlayers().size() < smallest.getSize()) {
+                smallest = team;
+            }
+        }
+        return smallest;
+    }
 }
